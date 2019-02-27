@@ -6,8 +6,9 @@
   if counter === times, call theFunc()
   return the theAfter 
  */
-export function after(times, theFunc){
-
+export function after(times, theFunc) {
+  counter = 0;
+  theFunc 
 }
 
 /*
