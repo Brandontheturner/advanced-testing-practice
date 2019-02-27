@@ -1,7 +1,5 @@
-
-import {after,once} from "../services/functions";
-import {add} from "../services/calculations";
-
+import { after, before, once } from "../services/functions";
+import { add } from "../services/calculations";
 
 //after should only call myFunc after it is called 4 times
 describe("after", () => {
@@ -17,8 +15,30 @@ describe("after", () => {
 });
 
 //before should only call myFunc 4 times at most
+describe("before", () => {
+  it("should only call myFunc before it is called 4 times", () => {
+    const myFunc = jest.fn();
+    let theBefore = before(4, myFunc);
+    theBefore();
+    theBefore();
+    theBefore();
+    theBefore();
+    theBefore();
+    expect(myFunc.mock.calls.length).toBe(4);
+  });
+});
 
 //once should only call add once
-//create a test that uses once on add 
+describe("once", () => {
+  it("should only call add once", () => {
+    const theOnce = jest.fn();
+    let myOnce = once(() => add(4, 5));
+    myOnce();
+    myOnce();
+    expect(myFunc.mock.calls.length).toBe(1);
+  });
+});
+
+//create a test that uses once on add
 //call the returned function with 4 and 5 to result in 9
 //all subsequent calls should result in 9 no matter what arguments are provided
