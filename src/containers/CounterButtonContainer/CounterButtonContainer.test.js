@@ -6,6 +6,14 @@ import store from "../../store";
 import CounterButtonContainer from "./";
 let wrapper = null;
 
+beforeAll(() => {
+  wrapper = mount(
+    <Provider store={store}>
+      <CounterButtonContainer />
+    </Provider>
+  );
+});
+
 beforeEach(() => {
   store.getState().currentCount = 0;
 });
@@ -17,14 +25,16 @@ describe("CounterButtonContainer", () => {
     increaseButton.simulate("click");
     increaseButton.simulate("click");
     increaseButton.simulate("click");
+    // console.log(store.getState().currentCount);
     expect(store.getState().currentCount).toBe(4);
   });
   it("Decrease button decreases the currentCount to -4", () => {
-    var increaseButton = wrapper.find("button").at(1);
-    increaseButton.simulate("click");
-    increaseButton.simulate("click");
-    increaseButton.simulate("click");
-    increaseButton.simulate("click");
+    var decreaseButton = wrapper.find("button").at(1);
+    decreaseButton.simulate("click");
+    decreaseButton.simulate("click");
+    decreaseButton.simulate("click");
+    decreaseButton.simulate("click");
+    // console.log(store.getState().currentCount);
     expect(store.getState().currentCount).toBe(-4);
   });
 });

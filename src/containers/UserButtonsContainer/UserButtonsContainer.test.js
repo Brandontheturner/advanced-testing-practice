@@ -1,22 +1,40 @@
-import index from "./index";
-import UserButtonContainer from "UserButtonContainer";
-import { createStore } from "redux";
+import React from "react";
+import { mount } from "enzyme";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import store from "../../store";
+import UserButtonsContainer from "./";
 
-var wrapper;
+let wrapper = null;
 
 beforeAll(() => {
-  wrapper = mount(<Provider store={store}><UserButtonsContainer /></Provider>);
-})
+  wrapper = mount(
+    <Provider store={store}>
+      <UserButtonsContainer />
+    </Provider>
+  );
+});
 
-describe("addUserButton", () => {
+beforeEach(() => {
+  // store.getState().users = [];
+});
+
+describe("UserButtonsContainer", () => {
   it("should increase users array length by 1", () => {
     var increaseButton = wrapper.find("button").at(0);
+    // console.log(store.getState().users);
+    var userLength = store.getState().users.length;
     increaseButton.simulate("click");
-    increaseButton.simulate("click");
-    increaseButton.simulate("click");
-    increaseButton.simulate("click");
-    expect(store.getState().currentCount).toBe(4);
+    expect(store.getState().users.length).toBe(userLength + 1);
   });
+  it("should decrease users array length by 1", () => {
+    var decreaseButton = wrapper.find("button").at(1);
+    // console.log(store.getState().users);
+    var userLength = store.getState().users.length;
+    decreaseButton.simulate("click");
+    expect(store.getState().users.length).toBe(userLength - 1);
+  });
+});
 
 // ### User Button Tests
 //   * Create a folder for UserButtonContainer in containers X
@@ -27,8 +45,8 @@ describe("addUserButton", () => {
 //     * Import store into the test X
 //       * create a variable called “wrapper” X
 //     * in beforeAll, mount the Provider and UserButtonsContainer and assign to wrapper X
-//   * Create a describe “Add User Button”
-//         * Create an it “should increase users array length by 1”
+//   * Create a describe “Add User Button” X
+//         * Create an it “should increase users array length by 1” X
 //         * Use the wrapper to find the first button
 //   * Simulate a click on the button
 //     * use store.getState() to check the length of the users array

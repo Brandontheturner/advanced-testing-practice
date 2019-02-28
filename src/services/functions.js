@@ -7,10 +7,6 @@
   return the theAfter 
  */
 export function after(times, theFunc) {
-<<<<<<< HEAD
-  counter = 0;
-  theFunc 
-=======
   let counter = 0;
   const theAfter = () => {
     counter += 1;
@@ -19,7 +15,6 @@ export function after(times, theFunc) {
     }
   };
   return theAfter;
->>>>>>> 408e45569ddab41a0fbf134d09409b1398edf5ce
 }
 
 /*

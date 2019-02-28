@@ -32,7 +32,7 @@ describe("before", () => {
 describe("once", () => {
   it("should only call add once", () => {
     const theOnce = jest.fn();
-    let myOnce = once(() => add(4, 5));
+    let myOnce = once(() => add());
     myOnce();
     myOnce();
     expect(myFunc.mock.calls.length).toBe(1);
