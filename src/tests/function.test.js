@@ -31,11 +31,10 @@ describe("before", () => {
 //once should only call add once
 describe("once", () => {
   it("should only call add once", () => {
-    const theOnce = jest.fn();
-    let myOnce = once(() => add());
-    myOnce();
-    myOnce();
-    expect(myFunc.mock.calls.length).toBe(1);
+    const myOnce = once(add);
+    const firstResult = myOnce(4, 5);
+    const secondResult = myOnce(7, 10);
+    expect(secondResult).toBe(9);
   });
 });
 

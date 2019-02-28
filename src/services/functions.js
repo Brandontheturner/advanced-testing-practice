@@ -48,11 +48,11 @@ return theOnce
  */
 export function once(theFunc) {
   let firstValue = null;
-  const theOnce = () => {
-    if (firstValue === null) {
-      firstValue = theFunc();
+  function theOnce() {
+    if (!firstValue) {
+      firstValue = theFunc(arguments[0], arguments[1]);
     }
     return firstValue;
-  };
+  }
   return theOnce;
 }
